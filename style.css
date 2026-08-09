@@ -158,10 +158,6 @@ nav a.active { border-bottom-color: #000; }
 
 /* Footer */
 footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding: 16px 0; }
-.social { display: flex; gap: 14px; }
-.social a { color: #7a7a7a; }
-.social a:hover { color: #000; }
-.social svg { width: 22px; height: 22px; }
 .foot-info { margin: 0; font-size: 12px; color: var(--muted); text-align: center; flex: 1; padding: 0 16px; }
 .foot-links { margin: 0; font-size: 12px; white-space: nowrap; }
 .foot-links a { color: var(--muted); }

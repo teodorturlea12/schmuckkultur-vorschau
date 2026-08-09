@@ -82,16 +82,19 @@ nav a.active { border-bottom-color: #000; }
 .home-main { min-width: 0; }
 .home-text { max-width: 640px; margin-top: 26px; }
 
-/* Social-Feeds links (2-Klick: Inhalte von Meta laden erst nach Klick) */
+/* Social-Feeds links (Facebook/Instagram, laden automatisch wie im Original) */
 .side-feeds { display: flex; flex-direction: column; gap: 28px; }
 .feed-card h2 { font-size: 14px; margin: 0 0 10px; }
 .feed-slot { border: 1px solid var(--line); background: #fff; }
 .feed-slot iframe { display: block; width: 100%; border: 0; }
-.feed-load { display: flex; align-items: center; gap: 9px; width: 100%; border: 0; background: #fff; padding: 14px; font-size: 13px; font-family: inherit; color: #000; cursor: pointer; text-align: left; }
-.feed-load:hover { text-decoration: underline; }
-.feed-load svg { width: 18px; height: 18px; flex: 0 0 auto; }
-.feed-hint { margin: 0; padding: 0 14px 12px; font-size: 11px; color: var(--muted); }
 .feed-link { margin: 8px 0 0; font-size: 12px; }
+
+/* Cookie-Hinweis (nur Startseite, wegen Meta-Einbettungen) */
+.cookie-bar { display: flex; align-items: center; gap: 14px; justify-content: center; background: #f3f2ef; border-bottom: 1px solid var(--line); margin: 0 -44px; padding: 9px 20px; font-size: 12px; color: var(--muted); }
+.cookie-bar a { color: var(--link); }
+.cookie-bar[hidden] { display: none; }
+.cb-x { border: 0; background: none; font-size: 18px; line-height: 1; cursor: pointer; color: var(--muted); padding: 2px 6px; }
+.cb-x:hover { color: #000; }
 
 /* Slider */
 .slider { position: relative; overflow: hidden; background: #fff; aspect-ratio: 1.55; max-height: 560px; }
@@ -194,6 +197,7 @@ footer { display: flex; align-items: center; justify-content: space-between; bor
   .side-img img { margin-left: 0; max-width: 300px; }
   .home-grid .side-feeds { order: 2; max-width: 340px; margin: 0 auto; width: 100%; }
   .home-grid .home-main { order: 1; }
+  .cookie-bar { margin: 0 -20px; text-align: left; }
   .slider .slide img { max-height: 340px; }
   .v-main img { max-height: 52vh; }
   .v-arrow { width: 40px; height: 40px; }

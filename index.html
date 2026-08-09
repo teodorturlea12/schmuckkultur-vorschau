@@ -86,6 +86,32 @@
     var tabs = document.querySelectorAll('.tab-btn');
     var fb = document.getElementById('feed-fb');
     var ig = document.getElementById('feed-ig');
+
+    // Desktop: Feed-Höhe an die rechte Spalte angleichen (wie Original — füllt bis unten).
+    // Läuft beim Laden und (entprellt) bei Fenstergrößen-Änderung, z. B. schmal geladen → maximiert.
+    var fitFeeds = function () {
+      if (!window.matchMedia('(min-width: 901px)').matches) return;
+      var card = document.querySelector('.feed-card');
+      var main = document.querySelector('.home-main');
+      var fbFrame = fb.querySelector('iframe');
+      if (!card || !main || !fbFrame) return;
+      var slot = fb.hidden ? ig : fb;
+      var extra = card.offsetHeight - slot.offsetHeight; // Reiter + Linkzeile
+      var h = Math.max(560, main.offsetHeight - extra - 2); // 2px Rahmen
+      if (Math.abs(h - (parseInt(fbFrame.getAttribute('height'), 10) || 0)) < 24) return; // Mini-Änderungen: kein Feed-Reload
+      fbFrame.height = h;
+      fbFrame.style.height = h + 'px';
+      fbFrame.src = fbFrame.src.replace(/height=\d+/, 'height=' + h);
+      ig.setAttribute('data-h', h);
+      var igFrame = ig.querySelector('iframe');
+      if (igFrame) { igFrame.height = h; igFrame.style.height = h + 'px'; }
+    };
+    fitFeeds();
+    var fitTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(fitFeeds, 250);
+    });
     tabs.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var showIg = btn.getAttribute('data-feed') === 'ig';

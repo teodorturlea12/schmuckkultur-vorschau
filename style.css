@@ -81,10 +81,17 @@ nav a.active { border-bottom-color: #000; }
 .home-grid { grid-template-columns: 300px minmax(0, 1fr); }
 .home-main { min-width: 0; }
 .home-text { max-width: 640px; margin-top: 26px; }
-.social-btns { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-.btn-social { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); padding: 9px 16px; color: #000; font-size: 13px; }
-.btn-social:hover { border-color: #000; text-decoration: none; }
-.btn-social svg { width: 17px; height: 17px; }
+
+/* Social-Feeds links (2-Klick: Inhalte von Meta laden erst nach Klick) */
+.side-feeds { display: flex; flex-direction: column; gap: 28px; }
+.feed-card h2 { font-size: 14px; margin: 0 0 10px; }
+.feed-slot { border: 1px solid var(--line); background: #fff; }
+.feed-slot iframe { display: block; width: 100%; border: 0; }
+.feed-load { display: flex; align-items: center; gap: 9px; width: 100%; border: 0; background: #fff; padding: 14px; font-size: 13px; font-family: inherit; color: #000; cursor: pointer; text-align: left; }
+.feed-load:hover { text-decoration: underline; }
+.feed-load svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.feed-hint { margin: 0; padding: 0 14px 12px; font-size: 11px; color: var(--muted); }
+.feed-link { margin: 8px 0 0; font-size: 12px; }
 
 /* Slider */
 .slider { position: relative; overflow: hidden; background: #fff; aspect-ratio: 1.55; max-height: 560px; }
@@ -185,7 +192,7 @@ footer { display: flex; align-items: center; justify-content: space-between; bor
   .logo-grid { justify-content: start; grid-template-columns: repeat(auto-fill, 72px); }
   .logo-grid img { width: 70px; height: 68px; }
   .side-img img { margin-left: 0; max-width: 300px; }
-  .home-grid .side-card { order: 2; }
+  .home-grid .side-feeds { order: 2; max-width: 340px; margin: 0 auto; width: 100%; }
   .home-grid .home-main { order: 1; }
   .slider .slide img { max-height: 340px; }
   .v-main img { max-height: 52vh; }

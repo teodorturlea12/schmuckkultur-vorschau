@@ -33,18 +33,15 @@
   <div class="layout home-grid">
     <aside class="side-feeds">
       <div class="feed-card">
-        <h2>Aktuell auf Facebook</h2>
-        <div class="feed-slot">
+        <div class="tab-row" role="tablist" aria-label="Soziale Netzwerke">
+          <button type="button" class="tab-btn on" data-feed="fb" role="tab" aria-selected="true">Facebook</button>
+          <button type="button" class="tab-btn" data-feed="ig" role="tab" aria-selected="false">Instagram</button>
+        </div>
+        <div class="feed-slot" id="feed-fb">
           <iframe src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fschmuckkulturweiss&amp;width=300&amp;height=560&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=true&amp;show_border=false" height="560" style="height:560px" title="Facebook-Beiträge von Schmuckkultur Weiss" loading="lazy" allow="encrypted-media"></iframe>
         </div>
-        <p class="feed-link"><a href="https://www.facebook.com/schmuckkulturweiss" target="_blank" rel="noopener">Zur Facebook-Seite</a></p>
-      </div>
-      <div class="feed-card">
-        <h2>Aktuell auf Instagram</h2>
-        <div class="feed-slot">
-          <iframe src="https://www.instagram.com/schmuckkultur.weiss/embed" height="440" style="height:440px" title="Instagram-Profil von Schmuckkultur Weiss" loading="lazy" allow="encrypted-media"></iframe>
-        </div>
-        <p class="feed-link"><a href="https://www.instagram.com/schmuckkultur.weiss" target="_blank" rel="noopener">Zum Instagram-Profil</a></p>
+        <div class="feed-slot" id="feed-ig" hidden data-src="https://www.instagram.com/schmuckkultur.weiss/embed" data-h="560" data-title="Instagram-Profil von Schmuckkultur Weiss"></div>
+        <p class="feed-link"><a href="https://www.facebook.com/schmuckkulturweiss" target="_blank" rel="noopener">Zur Facebook-Seite</a> · <a href="https://www.instagram.com/schmuckkultur.weiss" target="_blank" rel="noopener">Zum Instagram-Profil</a></p>
       </div>
     </aside>
     <div class="home-main">
@@ -79,10 +76,36 @@
   <script src="slider.js" defer></script>
   <script>(function () {
     var b = document.getElementById('cookie-bar');
-    try { if (localStorage.getItem('sk-cookiehinweis') === '1') { b.hidden = true; return; } } catch (e) {}
-    b.querySelector('.cb-x').addEventListener('click', function () {
+    try { if (localStorage.getItem('sk-cookiehinweis') === '1') { b.hidden = true; } } catch (e) {}
+    if (!b.hidden) b.querySelector('.cb-x').addEventListener('click', function () {
       b.hidden = true;
       try { localStorage.setItem('sk-cookiehinweis', '1'); } catch (e) {}
+    });
+
+    // Social-Reiter: Facebook standardmäßig, Instagram lädt beim ersten Wechsel
+    var tabs = document.querySelectorAll('.tab-btn');
+    var fb = document.getElementById('feed-fb');
+    var ig = document.getElementById('feed-ig');
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var showIg = btn.getAttribute('data-feed') === 'ig';
+        tabs.forEach(function (x) {
+          var on = x === btn;
+          x.classList.toggle('on', on);
+          x.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        fb.hidden = showIg;
+        ig.hidden = !showIg;
+        if (showIg && !ig.querySelector('iframe')) {
+          var f = document.createElement('iframe');
+          f.src = ig.getAttribute('data-src');
+          f.height = ig.getAttribute('data-h');
+          f.style.height = f.height + 'px';
+          f.title = ig.getAttribute('data-title');
+          f.setAttribute('allow', 'encrypted-media');
+          ig.appendChild(f);
+        }
+      });
     });
   })();</script>
   <footer>

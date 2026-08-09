@@ -83,10 +83,14 @@ nav a.active { border-bottom-color: #000; }
 .home-main { min-width: 0; }
 .home-text { max-width: 640px; margin-top: 26px; }
 
-/* Social-Feeds links (Facebook/Instagram, laden automatisch wie im Original) */
-.side-feeds { display: flex; flex-direction: column; gap: 28px; }
-.feed-card h2 { font-size: 14px; margin: 0 0 10px; }
+/* Social-Feeds links: EIN Kasten mit Facebook/Instagram-Reitern */
+.side-feeds { display: flex; flex-direction: column; }
+.tab-row { display: flex; gap: 24px; margin: 0 0 10px; }
+.tab-btn { border: 0; background: none; font-family: inherit; font-size: 14px; color: var(--muted); padding: 4px 0; border-bottom: 2px solid transparent; cursor: pointer; text-transform: lowercase; letter-spacing: 0.02em; }
+.tab-btn:hover { color: #000; }
+.tab-btn.on { color: #000; border-bottom-color: #000; }
 .feed-slot { border: 1px solid var(--line); background: #fff; }
+.feed-slot[hidden] { display: none; }
 .feed-slot iframe { display: block; width: 100%; border: 0; }
 .feed-link { margin: 8px 0 0; font-size: 12px; }
 

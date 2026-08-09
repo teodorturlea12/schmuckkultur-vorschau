@@ -129,6 +129,23 @@ nav a.active { border-bottom-color: #000; }
 .thumb-list a { display: block; border: 1px solid var(--line); line-height: 0; }
 .thumb-list a:hover { border-color: #000; }
 
+/* Kategorie-Kacheln (Schmuck-Übersicht) */
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px; align-content: start; }
+.cat-tile { display: block; color: #000; }
+.cat-tile:hover { text-decoration: none; }
+.cat-tile-img { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; border: 1px solid var(--line); background: #fff; padding: 12px; }
+.cat-tile:hover .cat-tile-img { border-color: #000; }
+.cat-tile-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.cat-tile-label { display: block; text-align: center; font-size: 13px; margin-top: 8px; text-transform: lowercase; color: var(--muted); }
+.cat-tile:hover .cat-tile-label { color: #000; }
+
+/* Lightbox (Zoom) */
+.lightbox { position: fixed; inset: 0; background: rgba(255,255,255,0.97); z-index: 60; display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 94vw; max-height: 94vh; width: auto; height: auto; }
+.lb-close { position: absolute; top: 14px; right: 18px; border: 1px solid var(--line); background: #fff; font-size: 26px; line-height: 1; width: 44px; height: 44px; cursor: pointer; }
+.lb-close:hover { border-color: #000; }
+
 /* Rechtstexte */
 .legal { font-size: 14px; }
 .legal h2 { margin-top: 30px; }
@@ -143,7 +160,8 @@ footer { display: flex; align-items: center; justify-content: space-between; bor
 .social a { color: #7a7a7a; }
 .social a:hover { color: #000; }
 .social svg { width: 22px; height: 22px; }
-.foot-links { margin: 0; font-size: 12px; }
+.foot-info { margin: 0; font-size: 12px; color: var(--muted); text-align: center; flex: 1; padding: 0 16px; }
+.foot-links { margin: 0; font-size: 12px; white-space: nowrap; }
 .foot-links a { color: var(--muted); }
 
 /* ============ Mobil / Tablet ============ */

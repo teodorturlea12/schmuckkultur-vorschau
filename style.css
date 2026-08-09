@@ -101,22 +101,9 @@ nav a.active { border-bottom-color: #000; }
 .cb-x { border: 0; background: none; font-size: 18px; line-height: 1; cursor: pointer; color: var(--muted); padding: 2px 6px; }
 .cb-x:hover { color: #000; }
 
-/* Slider */
-.slider { position: relative; overflow: hidden; background: #fff; aspect-ratio: 1.55; max-height: 560px; }
-.slider .slide { display: none; position: relative; height: 100%; }
-.slider .slide.on { display: block; }
-.slider .slide img { width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; user-select: none; }
-.slide-note { position: absolute; right: 14px; bottom: 12px; background: rgba(255,255,255,0.92); padding: 6px 12px; font-size: 12px; }
-.sl-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  border: 0; background: rgba(255,255,255,0.85); color: #111;
-  width: 42px; height: 42px; font-size: 24px; cursor: pointer; line-height: 1;
-}
-.sl-arrow:hover { background: #fff; }
-.sl-prev { left: 0; } .sl-next { right: 0; }
-.sl-dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 8px; }
-.sl-dots button { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.45); padding: 0; background: rgba(255,255,255,0.8); cursor: pointer; }
-.sl-dots button.on { background: #333; border-color: #333; }
+/* Startseiten-Bild (statisch, ehemals Slider) */
+.hero-still { background: #fff; }
+.hero-still img { display: block; width: 100%; height: auto; -webkit-user-drag: none; user-select: none; }
 
 /* Schmuck-Viewer */
 .viewer { min-width: 0; }
@@ -204,7 +191,6 @@ footer { display: flex; align-items: center; justify-content: space-between; bor
   .home-grid .home-main { order: 1; }
   .rail-designer { order: 2; }
   .cookie-bar { margin: 0 -20px; text-align: left; }
-  .slider .slide img { max-height: 340px; }
   .v-main img { max-height: 52vh; }
   .v-arrow { width: 40px; height: 40px; }
   .content-img img { max-width: 100%; }

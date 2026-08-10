@@ -70,7 +70,7 @@ nav a.active { border-bottom-color: #000; }
 .side-card p { margin: 0 0 4px; }
 
 /* Inhalt */
-.content-text { max-width: 640px; }
+.content-text { max-width: 640px; min-width: 0; overflow-wrap: break-word; }
 .content-text p { margin: 0 0 14px; }
 .content-img img { max-width: 560px; }
 .quote { font-style: italic; color: #111; font-size: 16px; }

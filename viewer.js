@@ -14,7 +14,6 @@
     var parts = [];
     if (p.d) parts.push('Designer: ' + (p.ds ? '<a href="designer-' + esc(p.ds) + '.html">' + esc(p.d) + '</a>' : esc(p.d)));
     if (p.b) parts.push('Beschreibung: ' + esc(p.b));
-    if (p.pr) parts.push('Preis: ' + esc(p.pr));
     parts.push((idx + 1) + ' / ' + items.length);
     return parts.join(' &nbsp;·&nbsp; ');
   }

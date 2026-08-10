@@ -103,6 +103,8 @@ nav a.active { border-bottom-color: #000; }
 /* Startseiten-Bild (statisch, ehemals Slider) */
 .hero-still { background: #fff; }
 .hero-still img { display: block; width: 100%; height: auto; -webkit-user-drag: none; user-select: none; }
+.hero-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); text-align: right; }
+.hero-note a { color: inherit; }
 
 /* Schmuck-Viewer */
 .viewer { min-width: 0; }

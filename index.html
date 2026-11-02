@@ -11,6 +11,10 @@
 </head>
 <body class="home">
 <div class="frame">
+  <div id="cookie-bar" class="cookie-bar">
+    <span>Diese Webseite verwendet Cookies durch eingebettete Facebook- und Instagram-Inhalte. Mit der Nutzung dieser Website erklären Sie sich einverstanden. <a href="impressum.html#datenschutz">Weitere Informationen</a></span>
+    <button type="button" class="cb-x" aria-label="Hinweis schließen">×</button>
+  </div>
   <header>
     <h1 class="brand">
       <a href="index.html" aria-label="Schmuckkultur Renate Weiss – Startseite"><img src="images/logo.jpg" srcset="images/logo.jpg 1x, images/logo@2x.jpg 2x" width="330" height="90" alt="Schmuckkultur Renate Weiss – Designschmuck Perlen"></a>
@@ -27,43 +31,18 @@
     </nav>
   </header>
   <div class="layout home-grid">
-    <aside class="side-feeds" aria-label="Aktuelles aus unserem Geschäft">
-  <div class="feed-card">
-    <div class="tab-row" role="tablist" aria-label="Soziale Netzwerke">
-      <button type="button" id="tab-fb" class="tab-btn on" data-feed="fb" role="tab" aria-selected="true" aria-controls="feed-fb">Facebook</button>
-      <button type="button" id="tab-ig" class="tab-btn" data-feed="ig" role="tab" aria-selected="false" aria-controls="feed-ig" tabindex="-1">Instagram</button>
-    </div>
-    <div class="feed-slot" id="feed-fb" role="tabpanel" aria-labelledby="tab-fb">
-      <div class="feed-intro">
-        <h2>Aktuelles aus dem Geschäft</h2>
-        <p>Neue Schmuckstücke und Einblicke finden Sie auf unserer Facebook-Seite.</p>
-        <p class="feed-privacy">Erst beim Laden werden Daten an Meta übermittelt. Dabei können Cookies gesetzt werden. <a href="impressum.html#datenschutz">Datenschutz</a></p>
-        <button type="button" class="feed-load" data-provider="fb" hidden>Facebook-Inhalte laden</button>
+    <aside class="side-feeds">
+      <div class="feed-card">
+        <div class="tab-row" role="tablist" aria-label="Soziale Netzwerke">
+          <button type="button" class="tab-btn on" data-feed="fb" role="tab" aria-selected="true">Facebook</button>
+          <button type="button" class="tab-btn" data-feed="ig" role="tab" aria-selected="false">Instagram</button>
+        </div>
+        <div class="feed-slot" id="feed-fb">
+          <iframe src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fschmuckkulturweiss&amp;width=300&amp;height=560&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=true&amp;show_border=false" height="560" style="height:560px" title="Facebook-Beiträge von Schmuckkultur Weiss" loading="lazy" allow="encrypted-media"></iframe>
+        </div>
+        <div class="feed-slot" id="feed-ig" hidden data-src="https://www.instagram.com/schmuckkultur.weiss/embed" data-h="560" data-title="Instagram-Profil von Schmuckkultur Weiss"></div>
       </div>
-      <div class="feed-embed" hidden></div>
-      <div class="feed-actions">
-        <a href="https://www.facebook.com/schmuckkulturweiss" target="_blank" rel="noopener noreferrer">Facebook-Profil öffnen</a>
-        <button type="button" class="feed-close" hidden>Einbettung schließen</button>
-      </div>
-      <p class="feed-fallback" hidden>Keine Beiträge sichtbar? Öffnen Sie das Profil direkt.</p>
-    </div>
-    <div class="feed-slot" id="feed-ig" role="tabpanel" aria-labelledby="tab-ig" hidden>
-      <div class="feed-intro">
-        <h2>Schmuck entdecken</h2>
-        <p>Entdecken Sie neue Lieblingsstücke und Inspiration auf Instagram.</p>
-        <p class="feed-privacy">Erst beim Laden werden Daten an Meta übermittelt. Dabei können Cookies gesetzt werden. <a href="impressum.html#datenschutz">Datenschutz</a></p>
-        <button type="button" class="feed-load" data-provider="ig" hidden>Instagram-Inhalte laden</button>
-      </div>
-      <div class="feed-embed" hidden></div>
-      <div class="feed-actions">
-        <a href="https://www.instagram.com/schmuckkultur.weiss" target="_blank" rel="noopener noreferrer">Instagram-Profil öffnen</a>
-        <button type="button" class="feed-close" hidden>Einbettung schließen</button>
-      </div>
-      <p class="feed-fallback" hidden>Keine Beiträge sichtbar? Öffnen Sie das Profil direkt.</p>
-    </div>
-    <noscript><p><a href="https://www.instagram.com/schmuckkultur.weiss" target="_blank" rel="noopener noreferrer">Instagram-Profil öffnen</a></p></noscript>
-  </div>
-</aside>
+    </aside>
     <div class="home-main">
       <div class="hero-still"><img src="images/intro1.jpg" srcset="images/intro1.jpg 1x, images/intro1@2x.jpg 2x" width="900" height="575" alt="Blick in unser Juweliergeschäft in Mödling"></div>
       <p class="hero-note"><a href="cliq.html">Wenn sich Hände verändern – mehr erfahren</a></p>
@@ -82,7 +61,66 @@
       </div>
     </div>
   </div>
-  <script src="social.js" defer></script>
+  <script>(function () {
+    var b = document.getElementById('cookie-bar');
+    try { if (localStorage.getItem('sk-cookiehinweis') === '1') { b.hidden = true; } } catch (e) {}
+    if (!b.hidden) b.querySelector('.cb-x').addEventListener('click', function () {
+      b.hidden = true;
+      try { localStorage.setItem('sk-cookiehinweis', '1'); } catch (e) {}
+    });
+
+    // Social-Reiter: Facebook standardmäßig, Instagram lädt beim ersten Wechsel
+    var tabs = document.querySelectorAll('.tab-btn');
+    var fb = document.getElementById('feed-fb');
+    var ig = document.getElementById('feed-ig');
+
+    // Desktop: Feed-Höhe an die rechte Spalte angleichen (wie Original — füllt bis unten).
+    // Läuft beim Laden und (entprellt) bei Fenstergrößen-Änderung, z. B. schmal geladen → maximiert.
+    var fitFeeds = function () {
+      if (!window.matchMedia('(min-width: 901px)').matches) return;
+      var card = document.querySelector('.feed-card');
+      var main = document.querySelector('.home-main');
+      var fbFrame = fb.querySelector('iframe');
+      if (!card || !main || !fbFrame) return;
+      var slot = fb.hidden ? ig : fb;
+      var extra = card.offsetHeight - slot.offsetHeight; // Reiter + Linkzeile
+      var h = Math.max(560, main.offsetHeight - extra - 2); // 2px Rahmen
+      if (Math.abs(h - (parseInt(fbFrame.getAttribute('height'), 10) || 0)) < 24) return; // Mini-Änderungen: kein Feed-Reload
+      fbFrame.height = h;
+      fbFrame.style.height = h + 'px';
+      fbFrame.src = fbFrame.src.replace(/height=\d+/, 'height=' + h);
+      ig.setAttribute('data-h', h);
+      var igFrame = ig.querySelector('iframe');
+      if (igFrame) { igFrame.height = h; igFrame.style.height = h + 'px'; }
+    };
+    fitFeeds();
+    var fitTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(fitFeeds, 250);
+    });
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var showIg = btn.getAttribute('data-feed') === 'ig';
+        tabs.forEach(function (x) {
+          var on = x === btn;
+          x.classList.toggle('on', on);
+          x.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        fb.hidden = showIg;
+        ig.hidden = !showIg;
+        if (showIg && !ig.querySelector('iframe')) {
+          var f = document.createElement('iframe');
+          f.src = ig.getAttribute('data-src');
+          f.height = ig.getAttribute('data-h');
+          f.style.height = f.height + 'px';
+          f.title = ig.getAttribute('data-title');
+          f.setAttribute('allow', 'encrypted-media');
+          ig.appendChild(f);
+        }
+      });
+    });
+  })();</script>
   <footer>
     <p class="foot-info">Schmuckkultur RENATE WEISS · Hauptstraße 71, 2340 Mödling · Mi–Fr 9:30–12:30 &amp; 15:00–18:00 Uhr, Sa 9:30–12:30 Uhr</p>
     <p class="foot-links"><a href="impressum.html">Impressum</a> · <a href="impressum.html#datenschutz">Datenschutz</a></p>
